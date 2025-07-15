@@ -1,5 +1,5 @@
 {
-  "name": "fsun-library",
+  "name": "nomash-library",
   "version": "0.0.0",
   "private": true,
   "type": "module",
@@ -7,26 +7,24 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "lint:oxlint": "oxlint . --fix -D correctness --ignore-path .gitignore",
-    "lint:eslint": "eslint . --fix",
-    "lint": "run-s lint:*",
+    "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore",
     "format": "prettier --write src/"
   },
   "dependencies": {
-    "vue": "^3.5.17"
+    "@primevue/themes": "^4.0.4",
+    "bootstrap": "^5.3.3",
+    "primevue": "^4.0.4",
+    "vue": "^3.4.29",
+    "vue-router": "^4.5.1"
   },
   "devDependencies": {
-    "@eslint/js": "^9.29.0",
-    "@vitejs/plugin-vue": "^6.0.0",
-    "@vue/eslint-config-prettier": "^10.2.0",
-    "eslint": "^9.29.0",
-    "eslint-plugin-oxlint": "~1.1.0",
-    "eslint-plugin-vue": "~10.2.0",
-    "globals": "^16.2.0",
-    "npm-run-all2": "^8.0.4",
-    "oxlint": "~1.1.0",
-    "prettier": "3.5.3",
-    "vite": "npm:rolldown-vite@latest",
-    "vite-plugin-vue-devtools": "^7.7.7"
+    "@rushstack/eslint-patch": "^1.8.0",
+    "@vitejs/plugin-vue": "^5.0.5",
+    "@vue/eslint-config-prettier": "^9.0.0",
+    "eslint": "^8.57.0",
+    "eslint-plugin-vue": "^9.23.0",
+    "prettier": "^3.2.5",
+    "vite": "^5.4.19",
+    "vite-plugin-vue-devtools": "^7.3.1"
   }
 }
