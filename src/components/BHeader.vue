@@ -12,11 +12,36 @@
         <li class="nav-item">
           <router-link to="/about" class="nav-link" active-class="active">About</router-link>
         </li>
+        <li class="nav-item">
+          <router-link to="/addbook" class="nav-link" active-class="active">Add Book</router-link>
+        </li>
+        <li class="nav-item">
+          <router-link to="/login" class="nav-link" active-class="active">Login</router-link>
+        </li>
+        <li class="nav-item">
+          <router-link to="/FireLogin" class="nav-link" active-class="active">Firebase Login</router-link>
+        </li>
+        <li class="nav-item">
+          <router-link to="/FireRegister" class="nav-link" active-class="active">Firebase Register</router-link>
+        </li>
+        <li class="nav-item">
+          <router-link to="/logout" class="nav-link" active-class="active">User Console</router-link>
+        </li>
       </ul>
       
       <!-- 用户状态和认证相关的导航 -->
       <div class="auth-section">
-        <div v-if="isAuthenticated" class="d-flex align-items-center">
+        <!-- Firebase用户状态 -->
+        <div v-if="isFirebaseAuthenticated" class="d-flex align-items-center">
+          <span class="me-3 text-success">
+            欢迎, {{ firebaseUser?.displayName || firebaseUser?.email }}!
+          </span>
+          <button @click="handleFirebaseLogout" class="btn btn-outline-danger btn-sm">
+            注销
+          </button>
+        </div>
+        <!-- 传统认证用户状态 -->
+        <div v-else-if="isAuthenticated" class="d-flex align-items-center">
           <span class="me-3 text-success">
             欢迎, {{ currentUser?.username }}!
           </span>
@@ -24,9 +49,13 @@
             注销
           </button>
         </div>
-        <div v-else>
-          <router-link to="/login" class="btn btn-primary btn-sm">
-            登录
+        <!-- 未登录状态 -->
+        <div v-else class="d-flex align-items-center">
+          <router-link to="/FireLogin" class="btn btn-primary btn-sm me-2">
+            Firebase登录
+          </router-link>
+          <router-link to="/login" class="btn btn-outline-primary btn-sm">
+            传统登录
           </router-link>
         </div>
       </div>
@@ -37,12 +66,20 @@
 <script setup>
 import { useRouter } from 'vue-router'
 import { isAuthenticated, currentUser, logout } from '../auth.js'
+import { isFirebaseAuthenticated, firebaseUser, firebaseLogout } from '../firebaseAuth.js'
 
 const router = useRouter()
 
 const handleLogout = () => {
   logout()
   router.push('/login')
+}
+
+const handleFirebaseLogout = async () => {
+  const success = await firebaseLogout()
+  if (success) {
+    router.push('/FireLogin')
+  }
 }
 </script>
 
