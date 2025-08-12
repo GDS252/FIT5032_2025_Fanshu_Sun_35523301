@@ -16,3 +16,9 @@ export default defineConfig({
     }
   }
 })
+
+module.exports = {
+  publicPath: process.env.NODE_ENV === 'production'
+    ? '/FIT5032_2025_Fanshu_Sun_35523301/'
+    : '/'
+}
